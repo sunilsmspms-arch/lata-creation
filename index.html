@@ -1,40 +1,88 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Lata Creation - Sunil Sir</title>
+<title>LATA CREATION - Photography & Videography | Sunil Sir</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-body{margin:0;font-family:Arial;background:#fff;color:#222}
-header{background:#b0005a;color:white;padding:20px;text-align:center}
-header h1{margin:0}
-.banner{padding:60px 20px;text-align:center;background:#ffe6f0}
-.banner h2{font-size:36px;color:#b0005a}
-.btn{background:#b0005a;color:white;padding:12px 25px;border:none;border-radius:25px;font-size:18px}
-.products{display:flex;gap:20px;justify-content:center;padding:30px;flex-wrap:wrap}
-.card{border:1px solid #ddd;border-radius:10px;padding:15px;width:220px;text-align:center}
-.card img{width:100%;border-radius:10px}
-footer{background:#222;color:white;text-align:center;padding:15px;margin-top:20px}
+body{margin:0;font-family:Arial;background:#fff;color:#333}
+.header{background:#000;color:#fff;padding:20px;text-align:center}
+.header h1{margin:0;font-size:32px;letter-spacing:2px}
+.header p{margin:5px;color:gold}
+.hero{background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url('static/images/wedding/DSC_1655.avif');background-size:cover;background-position:center;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center}
+.hero h2{font-size:40px;margin:0}
+.btn{background:gold;color:#000;padding:12px 25px;text-decoration:none;font-weight:bold;border-radius:5px;display:inline-block;margin-top:15px}
+.gallery{padding:30px 10px;text-align:center}
+.gallery h2{font-size:28px;margin-bottom:20px}
+.tabs button{padding:10px 20px;margin:5px;border:1px solid #000;background:#fff;cursor:pointer}
+.tabs button.active{background:#000;color:#fff}
+.photos{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px;padding:20px}
+.photos img{width:100%;height:300px;object-fit:cover;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,0.2)}
+.footer{background:#000;color:#fff;padding:20px;text-align:center;margin-top:30px}
 </style>
 </head>
 <body>
-<header>
+<div class="header">
 <h1>LATA CREATION</h1>
-<p>Owner - Sunil Sir</p>
-</header>
-<div class="banner">
-<h2>Beautiful Sarees & Dresses Collection</h2>
-<p>Trending Design - Best Quality - Best Price</p>
-<br>
-<button class="btn">Shop Now</button>
+<p>Professional Photography & Videography | Owner - Sunil Sir | Pune</p>
 </div>
-<div class="products">
-<div class="card"><img src="https://via.placeholder.com/220x280?text=Saree+1"><h3>Designer Saree</h3><p>Rs. 1499</p></div>
-<div class="card"><img src="https://via.placeholder.com/220x280?text=Saree+2"><h3>Fancy Saree</h3><p>Rs. 1299</p></div>
-<div class="card"><img src="https://via.placeholder.com/220x280?text=Dress"><h3>Kurti Dress</h3><p>Rs. 999</p></div>
+<div class="hero">
+<div>
+<h2>We Capture Your Beautiful Moments</h2>
+<p>Wedding | Haldi | Engagement | Reception</p>
+<a href="#gallery" class="btn">View Our Work</a>
 </div>
-<footer>
-<p>Contact: Lata Creation | Phone: 9XXXXXXXXX | Pune</p>
+</div>
+
+<div class="gallery" id="gallery">
+<h2>Our Latest Work</h2>
+<div class="tabs">
+<button class="active" onclick="show('wedding')">Wedding</button>
+<button onclick="show('haldi')">Haldi</button>
+<button onclick="show('engagement')">Engagement</button>
+<button onclick="show('reception')">Reception</button>
+</div>
+<div id="wedding" class="photos"></div>
+<div id="haldi" class="photos" style="display:none"></div>
+<div id="engagement" class="photos" style="display:none"></div>
+<div id="reception" class="photos" style="display:none"></div>
+</div>
+
+<div class="footer">
+<p>Contact: Lata Creation Photography | Phone: 9XXXXXXXXX | Pune</p>
 <p>© 2026 Lata Creation - Created by Sunil Sir</p>
-</footer>
+</div>
+
+<script>
+const folders = ['wedding','haldi','engagement','reception'];
+// yahan tumche photo nav taka - aata wedding che photo automatic lagtil
+const weddingPhotos = ["DSC_1655.avif","DSC_1656.avif","DSC_1657.avif","DSC_1658.avif","DSC_1659.avif","DSC_1660.avif"];
+
+function loadPhotos(){
+ let wDiv = document.getElementById('wedding');
+ weddingPhotos.forEach(p=>{
+   let img = document.createElement('img');
+   img.src = 'static/images/wedding/' + p;
+   img.onerror = function(){ this.style.display='none' };
+   wDiv.appendChild(img);
+ });
+ // dusre folder sathi pan same - jar photo takle tar distil
+ folders.slice(1).forEach(f=>{
+   let d = document.getElementById(f);
+   for(let i=1;i<=6;i++){
+     let img = document.createElement('img');
+     img.src = 'static/images/'+f+'/photo'+i+'.jpg';
+     img.onerror = function(){ this.style.display='none' };
+     d.appendChild(img);
+   }
+ });
+}
+function show(id){
+ folders.forEach(f=> document.getElementById(f).style.display='none');
+ document.getElementById(id).style.display='grid';
+ document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
+ event.target.classList.add('active');
+}
+loadPhotos();
+</script>
 </body>
 </html>
